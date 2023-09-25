@@ -34,7 +34,18 @@ struct ImmersiveView: View {
                     value.entity.position = value.convert(value.location3D, from: .local, to: value.entity.parent!)
                     
                 })
+        
+        .gesture(RotateGesture().targetedToAnyEntity().onChanged { value in
+            let sourceRotation = value.entity.transform.rotation
+            let delta = simd_quatf(angle: Float(value.rotation.radians), axis: [0, 1, 0])
+            value.entity.transform.rotation = sourceRotation * delta
+        })
+        
+        
+       
+        
                  }
+        
    
        
     
